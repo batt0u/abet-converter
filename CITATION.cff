@@ -10,7 +10,7 @@ url: "https://github.com/vcanonici/abet-converter"
 license: "GPL-3.0-or-later"
 authors:
   - family-names: "Canonici"
-    given-names: "Vinicius Garcia"
+    given-names: "Vinicius"
     orcid: "https://orcid.org/0009-0006-8269-9004"
 keywords:
   - ABET
