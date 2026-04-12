@@ -1,0 +1,6 @@
+{
+  "source": "homebrew bottle",
+  "formula_version": "1.0.1",
+  "bottle_key": "sonoma",
+  "original_url": "https://ghcr.io/v2/homebrew/core/mdbtools/blobs/sha256:49722390bf0230475a1261a0c10d90540b6ff056a07c54b74680eab7276c3a04"
+}

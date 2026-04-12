@@ -1,0 +1,5 @@
+﻿{
+  "source": "bundled windows vendor",
+  "bundle_key": "windows-x64",
+  "executables": ["mdb-tables.exe", "mdb-schema.exe", "mdb-export.exe"]
+}

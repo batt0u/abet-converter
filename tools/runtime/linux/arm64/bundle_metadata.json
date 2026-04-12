@@ -1,0 +1,6 @@
+{
+  "source": "homebrew bottle",
+  "formula_version": "1.0.1",
+  "bottle_key": "arm64_linux",
+  "original_url": "https://ghcr.io/v2/homebrew/core/mdbtools/blobs/sha256:1d367189a2aadd23bfe3dcc0aa062cb780d2ac8a6fa4d51a8b30b7f6d9486fa3"
+}
