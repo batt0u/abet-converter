@@ -71,6 +71,27 @@ abet-converter --input C:\data\incoming --output C:\data\converted --format sqli
 - `docs/output_artifacts.md`
 - `AGENTS.md`
 
+## Citation
+
+If you use `ABET CONVERTER` in research, please cite the repository in your paper, thesis, report, or dataset note.
+
+BibTeX:
+
+```bibtex
+@software{canonici_abet_converter_2026,
+  author = {Canonici, Vinicius Garcia},
+  title = {ABET CONVERTER},
+  year = {2026},
+  version = {0.3.0},
+  url = {https://github.com/vcanonici/abet-converter},
+  note = {Cross-platform CLI to convert ABET and MDB databases into SQLite, SQL, CSV, and XLSX}
+}
+```
+
+The repository also ships `CITATION.cff` and `citation.bib` for direct reuse.
+
+If the tool helps your work and you like the project, please consider giving the repository a star on GitHub.
+
 ## License
 
 GNU GPL v3 or later
