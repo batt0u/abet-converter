@@ -11,6 +11,7 @@ license: "GPL-3.0-or-later"
 authors:
   - family-names: "Canonici"
     given-names: "Vinicius Garcia"
+    orcid: "https://orcid.org/0009-0006-8269-9004"
 keywords:
   - ABET
   - SQLite
