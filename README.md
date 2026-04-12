@@ -17,6 +17,12 @@ Editable install:
 pip install -e .
 ```
 
+Install from a clone and verify:
+
+```bash
+abet-converter --help
+```
+
 ## Usage
 
 Installed command:
@@ -63,6 +69,11 @@ abet-converter --input C:\data\incoming --output C:\data\converted --format sqli
 
 - `docs/cli.md`
 - `docs/output_artifacts.md`
+- `AGENTS.md`
+
+## License
+
+GNU GPL v3 or later
 
 ## Validation
 

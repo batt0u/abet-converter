@@ -3,6 +3,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 EXPECTED_DOCS = {
+    "AGENTS.md",
     "README.md",
     "docs/cli.md",
     "docs/output_artifacts.md",
