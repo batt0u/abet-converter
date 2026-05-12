@@ -15,6 +15,7 @@ from abet_converter.drivers.mdbtools import MdbtoolsRuntime
 
 SUPPORTED_DB_SUFFIXES = {".abetdb", ".mdb"}
 SUPPORTED_FORMATS = ("sqlite", "sql", "csv", "xlsx")
+EXCEL_MAX_ROWS = 1_048_576
 
 
 @dataclass(frozen=True)
@@ -213,15 +214,26 @@ def write_sql_dump(sqlite_path: Path, sql_dump_path: Path) -> None:
         conn.close()
 
 
-def write_xlsx_workbook(xlsx_path: Path, exported_tables: list[tuple[str, list[str], list[list[str | None]]]]) -> None:
+def write_xlsx_workbook(
+    xlsx_path: Path,
+    exported_tables: list[tuple[str, list[str], list[list[str | None]]]],
+    max_rows_per_sheet: int = EXCEL_MAX_ROWS,
+) -> None:
     xlsx_path.parent.mkdir(parents=True, exist_ok=True)
     workbook = Workbook(write_only=True)
     used_names: set[str] = set()
+    data_rows_per_sheet = max_rows_per_sheet - 1
+    if data_rows_per_sheet < 1:
+        raise ValueError("max_rows_per_sheet must leave room for a header and at least one data row.")
+
     for table_name, headers, rows in exported_tables:
-        worksheet = workbook.create_sheet(title=normalize_sheet_name(table_name, used_names))
-        worksheet.append(headers)
-        for row in rows:
-            worksheet.append(row)
+        chunks = [rows[index : index + data_rows_per_sheet] for index in range(0, len(rows), data_rows_per_sheet)] or [[]]
+        for chunk_index, chunk in enumerate(chunks, start=1):
+            sheet_base_name = table_name if chunk_index == 1 else f"{table_name}_{chunk_index}"
+            worksheet = workbook.create_sheet(title=normalize_sheet_name(sheet_base_name, used_names))
+            worksheet.append(headers)
+            for row in chunk:
+                worksheet.append(row)
     workbook.save(xlsx_path)
 
 

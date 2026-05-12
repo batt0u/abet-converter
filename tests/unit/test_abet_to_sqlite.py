@@ -1,6 +1,7 @@
 ﻿from pathlib import Path
 
 import pytest
+from openpyxl import load_workbook
 
 import abet_converter.components.ingest.abet_to_sqlite as ingest_module
 from abet_converter.components.ingest.abet_to_sqlite import (
@@ -13,6 +14,7 @@ from abet_converter.components.ingest.abet_to_sqlite import (
     normalize_sheet_name,
     parse_csv_text,
     write_table_csv,
+    write_xlsx_workbook,
 )
 from abet_converter.drivers.mdbtools import MdbtoolsRuntime
 
@@ -156,6 +158,25 @@ def test_normalize_sheet_name_truncates_and_deduplicates() -> None:
     assert first == "x" * 31
     assert second == ("x" * 29) + "_1"
     assert blank == "Sheet"
+
+
+def test_write_xlsx_workbook_splits_large_tables_across_sheets(tmp_path: Path) -> None:
+    xlsx_path = tmp_path / "out.xlsx"
+
+    write_xlsx_workbook(
+        xlsx_path,
+        [("tbl_Data", ["ID"], [["1"], ["2"], ["3"], ["4"], ["5"]])],
+        max_rows_per_sheet=3,
+    )
+
+    workbook = load_workbook(xlsx_path, read_only=True)
+    try:
+        assert workbook.sheetnames == ["tbl_Data", "tbl_Data_2", "tbl_Data_3"]
+        assert [row for row in workbook["tbl_Data"].iter_rows(values_only=True)] == [("ID",), ("1",), ("2",)]
+        assert [row for row in workbook["tbl_Data_2"].iter_rows(values_only=True)] == [("ID",), ("3",), ("4",)]
+        assert [row for row in workbook["tbl_Data_3"].iter_rows(values_only=True)] == [("ID",), ("5",)]
+    finally:
+        workbook.close()
 
 
 def test_ensure_target_paths_do_not_exist_rejects_existing_csv_dir(tmp_path: Path) -> None:
