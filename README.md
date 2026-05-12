@@ -205,10 +205,10 @@ If you use ABET CONVERTER in research, please cite the repository.
 
 ```bibtex
 @software{canonici_abet_converter_2026,
-  author = {Canonici, Vinicius Garcia},
+  author = {Canonici, Vinicius Garcia and Pinto, Carlos},
   title = {ABET CONVERTER},
   year = {2026},
-  version = {0.3.2},
+  version = {0.3.3},
   url = {https://github.com/vcanonici/abet-converter},
   note = {Cross-platform CLI to convert ABET and MDB databases into SQLite, SQL, CSV, and XLSX}
 }

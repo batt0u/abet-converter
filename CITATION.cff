@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use ABET CONVERTER in research, please cite the software and the GitHub repository."
 title: "ABET CONVERTER"
 type: software
-version: 0.3.2
-date-released: 2026-04-12
+version: 0.3.3
+date-released: 2026-05-12
 abstract: "Cross-platform CLI to convert ABET and MDB databases into SQLite, SQL, CSV, and XLSX."
 repository-code: "https://github.com/vcanonici/abet-converter"
 url: "https://github.com/vcanonici/abet-converter"
@@ -12,6 +12,9 @@ authors:
   - family-names: "Canonici"
     given-names: "Vinicius"
     orcid: "https://orcid.org/0009-0006-8269-9004"
+  - family-names: "Pinto"
+    given-names: "Carlos"
+    orcid: "https://orcid.org/0000-0002-4435-6880"
 keywords:
   - ABET
   - SQLite
