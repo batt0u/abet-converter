@@ -7,3 +7,5 @@ __pycache__/
 *.sqlite-wal
 *.sqlite-journal
 abet_converter_packaging_plan.md
+local-tests/*
+!local-tests/.gitkeep
