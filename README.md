@@ -107,6 +107,22 @@ To export several formats at once:
 abet-converter --input input.ABETdb --output output-folder --format sqlite --format csv --format xlsx
 ```
 
+## Large XLSX Files
+
+Excel has a row limit for each sheet.
+
+If a database table is too large for one Excel sheet, ABET CONVERTER automatically splits that table into more sheets.
+
+For example:
+
+```text
+tbl_Data
+tbl_Data_2
+tbl_Data_3
+```
+
+This keeps all rows instead of silently dropping data.
+
 ## Windows Notes
 
 If this command does not work:
@@ -208,7 +224,7 @@ If you use ABET CONVERTER in research, please cite the repository.
   author = {Canonici, Vinicius Garcia and Pinto, Carlos},
   title = {ABET CONVERTER},
   year = {2026},
-  version = {0.3.3},
+  version = {0.3.4},
   url = {https://github.com/vcanonici/abet-converter},
   note = {Cross-platform CLI to convert ABET and MDB databases into SQLite, SQL, CSV, and XLSX}
 }
