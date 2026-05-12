@@ -1,9 +1,9 @@
-from pathlib import Path
+﻿from pathlib import Path
 
 import pytest
 
-from src.components.ingest.abet_to_sqlite import normalize_formats
-from src.deployments.cli import _validate_output_path, build_parser
+from abet_converter.components.ingest.abet_to_sqlite import normalize_formats
+from abet_converter.cli import _validate_output_path, build_parser
 
 
 def test_cli_exposes_abet_converter_interface() -> None:

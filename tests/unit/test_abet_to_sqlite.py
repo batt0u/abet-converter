@@ -1,15 +1,15 @@
-from pathlib import Path
+﻿from pathlib import Path
 
 import pytest
 
-import src.components.ingest.abet_to_sqlite as ingest_module
-from src.components.ingest.abet_to_sqlite import (
+import abet_converter.components.ingest.abet_to_sqlite as ingest_module
+from abet_converter.components.ingest.abet_to_sqlite import (
     ConversionTarget,
     build_conversion_targets,
     convert_one,
     discover_abet_sources,
 )
-from src.drivers.mdbtools import MdbtoolsRuntime
+from abet_converter.drivers.mdbtools import MdbtoolsRuntime
 
 
 def test_discover_abet_sources_reads_file_and_folder(tmp_path: Path) -> None:

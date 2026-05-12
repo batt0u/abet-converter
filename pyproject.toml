@@ -1,24 +1,40 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "abet-converter"
-version = "0.3.0"
+version = "0.3.1"
 description = "Cross-platform self-contained CLI to convert ABET and MDB databases into SQLite, SQL, CSV, and XLSX."
-requires-python = ">=3.11"
 readme = "README.md"
+requires-python = ">=3.11"
 dependencies = ["openpyxl>=3.1"]
+license = "GPL-3.0-or-later"
+authors = [{ name = "Vinicius Garcia Canonici" }]
+keywords = ["abet", "mdb", "sqlite", "sql", "csv", "xlsx", "converter", "cli"]
+
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Environment :: Console",
+  "Topic :: Database",
+  "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/vcanonici/abet-converter"
+Repository = "https://github.com/vcanonici/abet-converter"
+Issues = "https://github.com/vcanonici/abet-converter/issues"
 
 [project.scripts]
-abet-converter = "src.deployments.cli:main"
-
-[tool.setuptools]
-include-package-data = false
+abet-converter = "abet_converter.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["src*"]
+where = ["src"]
+
+[tool.setuptools.package-data]
+abet_converter = ["vendor/mdbtools/**/*"]
 
 [tool.pytest.ini_options]
-pythonpath = ["."]
+pythonpath = ["src"]
 testpaths = ["tests"]

@@ -1,8 +1,8 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 from pathlib import Path
 
-from src.interfaces.models import RunContext
+from abet_converter.interfaces.models import RunContext
 
 
 def build_run_context(repo_root: Path, run_id: str, dataset_id: str, step_name: str) -> RunContext:

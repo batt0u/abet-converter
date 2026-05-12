@@ -4,20 +4,34 @@ Cross-platform, self-contained CLI for converting `.ABETdb` and `.mdb` files int
 
 The repository is designed as a public end-user tool. Bundled `mdbtools` runtimes are shipped inside the repo for Windows, Linux, and macOS so the default workflow stays simple.
 
-## Install
+## Installation
 
 Requirements:
 
 - Python `3.11+`
 - no external `mdbtools` install required for supported bundled platforms
 
-Editable install:
+### Recommended: pipx
 
 ```bash
-pip install -e .
+pipx install abet-converter
 ```
 
-Install from a clone and verify:
+### pip
+
+```bash
+python -m pip install abet-converter
+```
+
+### From source
+
+```bash
+git clone https://github.com/vcanonici/abet-converter.git
+cd abet-converter
+python -m pip install -e .
+```
+
+Verify:
 
 ```bash
 abet-converter --help
@@ -82,7 +96,7 @@ BibTeX:
   author = {Canonici, Vinicius Garcia},
   title = {ABET CONVERTER},
   year = {2026},
-  version = {0.3.0},
+  version = {0.3.1},
   url = {https://github.com/vcanonici/abet-converter},
   note = {Cross-platform CLI to convert ABET and MDB databases into SQLite, SQL, CSV, and XLSX}
 }

@@ -4,6 +4,7 @@ import os
 import platform
 import sys
 from dataclasses import dataclass
+from importlib.resources import as_file, files
 from pathlib import Path
 
 
@@ -45,12 +46,18 @@ def detect_platform_key() -> tuple[str, str, str, str | None]:
     raise RuntimeError(f"Unsupported platform for bundled mdbtools: {sys.platform}")
 
 
-def resolve_mdbtools_runtime(repo_root: Path, override_dir: Path | None = None) -> MdbtoolsRuntime:
+def _bundled_runtime_dir(os_name: str, architecture: str) -> Path:
+    resource = files("abet_converter") / "vendor" / "mdbtools" / os_name / architecture
+    with as_file(resource) as path:
+        return Path(path)
+
+
+def resolve_mdbtools_runtime(override_dir: Path | None = None) -> MdbtoolsRuntime:
     if override_dir is not None:
         bundle_dir = override_dir.resolve()
         if not bundle_dir.exists():
             raise FileNotFoundError(f"mdbtools override directory not found: {bundle_dir}")
-        suffix = ".exe" if any((bundle_dir / f"mdb-tables{ext}").exists() for ext in (".exe",)) else ""
+        suffix = ".exe" if (bundle_dir / "mdb-tables.exe").exists() else ""
         library_env_var = None
         if sys.platform.startswith("linux"):
             library_env_var = "LD_LIBRARY_PATH"
@@ -59,7 +66,7 @@ def resolve_mdbtools_runtime(repo_root: Path, override_dir: Path | None = None) 
         return MdbtoolsRuntime(bundle_dir=bundle_dir, executable_suffix=suffix, library_env_var=library_env_var)
 
     os_name, architecture, suffix, library_env_var = detect_platform_key()
-    bundle_dir = repo_root / "tools" / "runtime" / os_name / architecture
+    bundle_dir = _bundled_runtime_dir(os_name, architecture)
     if not bundle_dir.exists():
         raise FileNotFoundError(f"Bundled mdbtools runtime not found for {os_name}/{architecture}: {bundle_dir}")
     return MdbtoolsRuntime(bundle_dir=bundle_dir, executable_suffix=suffix, library_env_var=library_env_var)

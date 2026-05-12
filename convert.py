@@ -1,6 +1,6 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
-from src.deployments.cli import main
+from abet_converter.cli import main
 
 
 if __name__ == "__main__":

@@ -5,6 +5,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 EXPECTED_DOCS = {
     "AGENTS.md",
     "README.md",
+    "abet_converter_packaging_plan.md",
     "docs/cli.md",
     "docs/output_artifacts.md",
 }

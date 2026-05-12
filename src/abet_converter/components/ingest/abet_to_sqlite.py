@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import csv
 import io
@@ -10,7 +10,7 @@ from pathlib import Path
 
 from openpyxl import Workbook
 
-from src.drivers.mdbtools import MdbtoolsRuntime
+from abet_converter.drivers.mdbtools import MdbtoolsRuntime
 
 
 SUPPORTED_DB_SUFFIXES = {".abetdb", ".mdb"}

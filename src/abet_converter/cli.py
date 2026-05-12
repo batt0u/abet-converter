@@ -1,18 +1,15 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import argparse
 from pathlib import Path
 
-from src.components.ingest.abet_to_sqlite import (
+from abet_converter.components.ingest.abet_to_sqlite import (
     build_conversion_targets,
     convert_many,
     discover_abet_sources,
     normalize_formats,
 )
-from src.drivers.mdbtools import resolve_mdbtools_runtime
-
-
-REPO_ROOT = Path(__file__).resolve().parents[2]
+from abet_converter.drivers.mdbtools import resolve_mdbtools_runtime
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -49,7 +46,7 @@ def main(argv: list[str] | None = None) -> int:
     input_path = args.input_path.resolve()
     output_path = args.output_path.resolve()
     formats = normalize_formats(args.formats)
-    runtime = resolve_mdbtools_runtime(REPO_ROOT, args.mdbtools_dir.resolve() if args.mdbtools_dir else None)
+    runtime = resolve_mdbtools_runtime(override_dir=args.mdbtools_dir.resolve() if args.mdbtools_dir else None)
 
     _validate_output_path(input_path, output_path, formats)
 
