@@ -1,117 +1,219 @@
 # ABET CONVERTER
 
-Cross-platform, self-contained CLI for converting `.ABETdb` and `.mdb` files into SQLite, SQL dump, CSV, and XLSX.
+ABET CONVERTER is a small command-line tool that converts `.ABETdb` and `.mdb` database files into easier formats:
 
-The repository is designed as a public end-user tool. Bundled `mdbtools` runtimes are shipped inside the repo for Windows, Linux, and macOS so the default workflow stays simple.
+- SQLite
+- SQL
+- CSV
+- XLSX
 
-## Installation
+You do not need to install `mdbtools` yourself. ABET CONVERTER includes the needed runtime files and chooses the correct one automatically for Windows, macOS, or Linux.
 
-Requirements:
+## What This Tool Does
 
-- Python `3.11+`
-- no external `mdbtools` install required for supported bundled platforms
+Use this tool when you have an `.ABETdb` or `.mdb` file and want a file that is easier to open, inspect, or share.
 
-### Recommended: pipx
+For example, you can turn:
 
-```bash
-pipx install abet-converter
+```text
+input.ABETdb
 ```
 
-### pip
+into:
+
+```text
+input.sqlite
+```
+
+## Install Python
+
+You need Python 3.11 or newer.
+
+Download Python here:
+
+```text
+https://www.python.org/downloads/
+```
+
+During Python installation on Windows, enable:
+
+```text
+Add python.exe to PATH
+```
+
+## Install ABET Converter
+
+Open a terminal.
+
+On Windows, open PowerShell.
+
+On macOS or Linux, open Terminal.
+
+Run:
 
 ```bash
 python -m pip install abet-converter
 ```
 
-### From source
+ABET CONVERTER is installed from PyPI, the official Python package website.
 
-```bash
-git clone https://github.com/vcanonici/abet-converter.git
-cd abet-converter
-python -m pip install -e .
-```
+You do not need to choose a Windows, macOS, or Linux installer. The same Python package works on all supported systems. When you run the command, ABET CONVERTER detects your system and uses the correct bundled runtime:
 
-Verify:
+- Windows: `vendor/mdbtools/windows/...`
+- macOS: `vendor/mdbtools/macos/...`
+- Linux: `vendor/mdbtools/linux/...`
+
+## Check That It Works
+
+Run:
 
 ```bash
 abet-converter --help
 ```
 
-## Usage
+If you see help text, the installation worked.
 
-Installed command:
+## Convert One File
 
-```bash
-abet-converter --input C:\data\input.ABETdb --output C:\data\input.sqlite
-```
-
-Direct script:
+This example converts one ABET database into one SQLite file:
 
 ```bash
-python convert.py --input C:\data\input.ABETdb --output C:\data\input.sqlite
+abet-converter --input input.ABETdb --output input.sqlite
 ```
 
-Multiple formats from one file:
+You can replace `input.ABETdb` with the path to your own file.
+
+## Convert A Folder
+
+This example converts all supported files in a folder:
 
 ```bash
-abet-converter --input C:\data\input.ABETdb --output C:\data\exports --format sqlite --format sql --format csv --format xlsx
+abet-converter --input incoming-folder --output converted-folder --recursive
 ```
 
-Directory conversion:
+## Export Other Formats
+
+SQLite is the default format.
+
+To export CSV files:
 
 ```bash
-abet-converter --input C:\data\incoming --output C:\data\converted --format sqlite --format csv --recursive
+abet-converter --input input.ABETdb --output output-folder --format csv
 ```
 
-## Behavior
+To export several formats at once:
 
-- default format is `sqlite`
-- file input + only `sqlite` uses a single `.sqlite` file output
-- directory input always requires an output directory
-- any export including `sql`, `csv`, or `xlsx` requires an output directory
-- existing outputs are not overwritten
-- `--mdbtools-dir` can override the bundled runtime if needed
+```bash
+abet-converter --input input.ABETdb --output output-folder --format sqlite --format csv --format xlsx
+```
 
-## Formats
+## Windows Notes
 
-- `sqlite`: one `.sqlite` per source database
-- `sql`: one `.sql` dump per source database
-- `csv`: one directory per source database with one `.csv` per table
-- `xlsx`: one workbook per source database with one sheet per table
+If this command does not work:
 
-## Docs
+```powershell
+python -m pip install abet-converter
+```
 
-- `docs/cli.md`
-- `docs/output_artifacts.md`
-- `AGENTS.md`
+try:
+
+```powershell
+py -m pip install abet-converter
+```
+
+Then check:
+
+```powershell
+abet-converter --help
+```
+
+Windows users do not need to install extra database tools.
+
+## macOS Notes
+
+If this command does not work:
+
+```bash
+python -m pip install abet-converter
+```
+
+try:
+
+```bash
+python3 -m pip install abet-converter
+```
+
+Then check:
+
+```bash
+abet-converter --help
+```
+
+macOS users do not need to install extra database tools.
+
+## Linux Notes
+
+If this command does not work:
+
+```bash
+python -m pip install abet-converter
+```
+
+try:
+
+```bash
+python3 -m pip install abet-converter
+```
+
+Then check:
+
+```bash
+abet-converter --help
+```
+
+Linux users do not need to install extra database tools on supported architectures.
+
+## What Is A Coding Agent?
+
+A coding agent is an AI tool that can help with a software project.
+
+It can read files, explain code, run commands, edit files, run tests, and help fix errors.
+
+You can use a coding agent even if you are not a programmer. You can ask it to do practical tasks in plain language.
+
+## Using A Coding Agent To Install Or Modify This Project
+
+You can ask a coding agent things like:
+
+```text
+Install this project on my computer.
+Run the tests and explain any failure.
+Convert this ABETdb file to SQLite.
+Add a new output format.
+```
+
+If you want to work on the project itself, ask the agent to clone the repository, install it, run the tests, and explain the files before making changes.
+
+## Project Links
+
+- GitHub: `https://github.com/vcanonici/abet-converter`
+- PyPI: `https://pypi.org/project/abet-converter/`
 
 ## Citation
 
-If you use `ABET CONVERTER` in research, please cite the repository in your paper, thesis, report, or dataset note.
-
-BibTeX:
+If you use ABET CONVERTER in research, please cite the repository.
 
 ```bibtex
 @software{canonici_abet_converter_2026,
   author = {Canonici, Vinicius Garcia},
   title = {ABET CONVERTER},
   year = {2026},
-  version = {0.3.1},
+  version = {0.3.2},
   url = {https://github.com/vcanonici/abet-converter},
   note = {Cross-platform CLI to convert ABET and MDB databases into SQLite, SQL, CSV, and XLSX}
 }
 ```
 
-The repository also ships `CITATION.cff` and `citation.bib` for direct reuse.
-
-If the tool helps your work and you like the project, please consider giving the repository a star on GitHub.
-
 ## License
 
 GNU GPL v3 or later
-
-## Validation
-
-```bash
-pytest
-```
